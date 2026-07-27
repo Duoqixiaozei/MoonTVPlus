@@ -1,0 +1,20 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # 允许你在 Actions 标签页手动点击触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync upstream changes
+        uses: a286/pull-upstream@v1
+        with:
+          upstream: mtvpls/MoonTVPlus
+          branch: main            
+          token: ${{ secrets.GITHUB_TOKEN }}
